@@ -68,6 +68,11 @@ const options = [
 
 options.forEach(opt => argv.option(opt));
 
+if (process.argv.length < 3) {
+  argv.help();
+  process.exit(0);
+}
+
 const args = argv.run();
 
 /*
@@ -77,11 +82,18 @@ const user = options.user || '';
 const password = options.password || '';
 
 const host = options.host || '';
-const port = options.port || '';
+const port = options.port || 4222;
 
-const nc = nats.connect({
-  user, password, host, port
-});
+let nc;
+try {
+  nc = nats.connect({
+    user, password, host, port
+  });
+} catch (e) {
+  console.error(e);
+  argv.help();
+  process.exit(0);
+}
 
 const cleanup = () => {
   try {
@@ -92,6 +104,9 @@ const cleanup = () => {
   process.exit(0);
 };
 
+/*
+ *  Main procedure
+ */
 const topic = args.options.topic || 'cli.hello.world';
 const data = args.options.data || '';
 const timeout = args.options.timeout || 1000;
