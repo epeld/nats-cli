@@ -20,6 +20,10 @@ then you can start the app using
 or use the helper
 
     ./nats-cli
+    
+I recommend copying the helper somewhere on your PATH, e.g `/usr/local/bin` so
+that it is easier to access. Note that you might have to provide an absolute path
+to app.js when doing this.
 
 ## Usage
 
