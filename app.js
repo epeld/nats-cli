@@ -53,12 +53,6 @@ const options = [
     description: 'Message payload'
   },
   {
-    name: 'topic',
-    short: 't',
-    type: 'string',
-    description: 'Nats Topic'
-  },
-  {
     name: 'timeout',
     short: 'T',
     type: 'string',
