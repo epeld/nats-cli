@@ -107,12 +107,12 @@ const cleanup = () => {
 /*
  *  Main procedure
  */
-const topic = args.options.topic || 'cli.hello.world';
 const data = args.options.data || '';
 const timeout = args.options.timeout || 1000;
 
 if ('request' in args.options) {
-  nc.requestOne(topic, data, {}, timeout, (response) => {
+  const request = args.options.request || 'cli.request';
+  nc.requestOne(request, data, {}, timeout, (response) => {
     if (response.code && response.code === nats.REQ_TIMEOUT) {
       console.error('Request timed out.');
     } else {
@@ -121,11 +121,13 @@ if ('request' in args.options) {
     cleanup();
   });
 } else if ('publish' in args.options) {
-  nc.publish(topic, data, (response) => {
+  const publish = args.options.publish || 'cli.hello.world';
+  nc.publish(publish, data, (response) => {
     cleanup();
   });
 } else if ('subscribe' in args.options) {
-  nc.subscribe(topic, (data, _replyTo, topic) => {
+  const subscribe = args.options.subscribe || '>';
+  nc.subscribe(subscribe, (data, _replyTo, topic) => {
     if (!data || data === '') {
       // Fall back on logging topic in case message is missing
       console.log(topic);
