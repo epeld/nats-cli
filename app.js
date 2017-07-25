@@ -63,6 +63,12 @@ const options = [
     short: 'T',
     type: 'string',
     description: 'Request Timeout'
+  },
+  {
+    name: 'auto-reply',
+    short: 'R',
+    type: 'string',
+    description: 'When subscribing, specify an auto-reply on all received messages'
   }
 ];
 
@@ -127,12 +133,17 @@ if ('request' in args.options) {
   });
 } else if ('subscribe' in args.options) {
   const subscribe = args.options.subscribe || '>';
-  nc.subscribe(subscribe, (data, _replyTo, topic) => {
+  const autoreply = args.options['auto-reply'];
+  nc.subscribe(subscribe, (data, replyTo, topic) => {
     if (!data || data === '') {
       // Fall back on logging topic in case message is missing
       console.log(topic);
     } else {
       console.log(data);
+    }
+
+    if (autoreply) {
+      nc.publish(replyTo, autoreply);
     }
   });
 }
