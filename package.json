@@ -1,0 +1,15 @@
+{
+  "name": "nats-cli",
+  "version": "1.0.0",
+  "description": "Nats command line interface",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Erik Peldan",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "argv": "0.0.2",
+    "nats": "^0.7.20"
+  }
+}
