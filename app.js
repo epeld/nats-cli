@@ -125,7 +125,12 @@ if ('request' in args.options) {
     cleanup();
   });
 } else if ('subscribe' in args.options) {
-  nc.subscribe(topic, (data) => {
-    console.log(data);
+  nc.subscribe(topic, (data, _replyTo, topic) => {
+    if (!data || data === '') {
+      // Fall back on logging topic in case message is missing
+      console.log(topic);
+    } else {
+      console.log(data);
+    }
   });
 }
