@@ -8,6 +8,19 @@ You can:
 - Publish a message
 - Subscribe to a message
 
+## Setup
+Clone the repo and run
+
+    npm install
+    
+then you can start the app using
+
+    node app.js
+    
+or use the helper
+
+    ./nats-cli
+
 ## Usage
 
 Request example (assuming there is a counterpart that will answer 'World!') on the other end:
@@ -21,7 +34,7 @@ Publish example
     
 Subscribe example
 
-    nats-cli -S hello.>
+    nats-cli -S 'hello.>'
     > hello
     > hello.all
     
@@ -31,3 +44,4 @@ Also try
     nats-cli --help
     
 for more options.
+
