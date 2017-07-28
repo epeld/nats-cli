@@ -12,21 +12,15 @@ const options = [
   },
   {
     name: 'password',
-    short: 'W',
+    short: 'p',
     type: 'string',
     description: 'Nats password - if any'
   },
   {
-    name: 'port',
-    short: 'p',
-    type: 'string',
-    description: 'Nats port. Default 4222'
-  },
-  {
-    name: 'host',
+    name: 'url',
     short: 'h',
     type: 'string',
-    description: 'Nats port. Default 4222'
+    description: 'Nats url. Default nats://127.0.0.1:4222'
   },
   {
     name: 'request',
@@ -78,17 +72,17 @@ const args = argv.run();
 /*
  *  Setup Nats
  */
-const user = options.user || '';
-const password = options.password || '';
+const user = args.options.user || '';
+const password = args.options.password || '';
 
-const host = options.host || '';
-const port = options.port || 4222;
+const url = args.options.host || 'nats://127.0.0.1:4222';
 
 let nc;
 try {
-  nc = nats.connect({
-    user, password, host, port
-  });
+  let config = {
+    user, password, url
+  };
+  nc = nats.connect(config);
 } catch (e) {
   console.error(e);
   argv.help();
