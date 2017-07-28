@@ -49,3 +49,7 @@ Also try
     
 for more options.
 
+Too see every message sent:
+
+    nats-cli -S '>'
+    
