@@ -18,7 +18,7 @@ const options = [
   },
   {
     name: 'url',
-    short: 'h',
+    short: 's',
     type: 'string',
     description: 'Nats url. Default nats://127.0.0.1:4222'
   },
