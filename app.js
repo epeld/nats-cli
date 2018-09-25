@@ -127,7 +127,7 @@ if ('request' in args.options) {
       // Fall back on logging topic in case message is missing
       console.log(topic);
     } else {
-      console.log(data);
+      console.log(`${topic}: ${JSON.stringify(data)}`);
     }
 
     if (autoreply) {
